@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 class Beverage
 {
-    protected string $color;
-    protected float $price;
-    protected string $temperature = 'cold';
+    private string $color;
+    private float $price;
+    private string $temperature = 'cold';
 
     public function __construct(string $color, float $price, string $temperature = 'cold')
     {
@@ -14,9 +14,10 @@ class Beverage
         $this->price = $price;
         $this->temperature = $temperature;
     }
+
     public function getInfo(): string
     {
-        return 'This beverage is ' . $this->temperature . ' and ' . $this->color . '.';
+        return 'This beverage is ' . $this->temperature . ' and ' . $this->getColor() . '.';
     }
 }
 
@@ -33,6 +34,16 @@ class Beer extends Beverage
         $this->name = $name;
         $this->alcoholPercentage = $alcoholPercentage;
     }
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color)
+    {
+        $this->color = $color;
+        return $this;
+    }
 
     public function getAlcoholpercentage(): float
     {
@@ -40,12 +51,12 @@ class Beer extends Beverage
     }
     public function beerInfo(): string
     {
-        return 'Hi i\'m Duvel and have an alcohol percentage of ' . $this->alcoholPercentage . ' and I have a ' . $this->color . ' color.';
+        return 'Hi i\'m Duvel and have an alcohol percentage of ' . $this->alcoholPercentage . ' and I have a ' . $this->getColor() . ' color.';
     }
 }
 
 $duvel = new Beer('light', 3.5, 'Duvel', 8.5);
-var_dump($duvel);
+//var_dump($duvel);
 echo 'This beverage has ' . $duvel->getAlcoholpercentage() . ' % alcohol.';
 echo '<br>';
 echo $duvel->getInfo();
